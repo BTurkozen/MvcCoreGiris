@@ -1,0 +1,53 @@
+﻿@model List<Kisi>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<a asp-action="Yeni" class="btn btn-outline-dark m-3 float-right">
+    <i class="fas fa-plus p-1"></i>
+    Yeni Kişi
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Kişi Ad</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kisi in Model)
+        {
+            <tr>
+                <td>@kisi.Id</td>
+                <td>@kisi.KisiAd</td>
+                <td>
+                    <a asp-action="Duzenle" asp-route-id="@kisi.Id" class="btn btn-outline-dark">Duzenle</a>
+                    <a href="#" class="btn btn-outline-danger" onclick="sil(@kisi.Id, '@kisi.KisiAd')">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-action="Sil" name="silForm">
+    <input type="hidden" name="id" />
+</form>
+
+
+@section scripts{ 
+
+<script>
+    function sil(id, kisiad) {
+        event.preventDefault();
+        if (confirm('"' + kisiad + '"adlı kişiyi silmek istediğinize eminmisiniz?')) {
+            document.silForm.element.id.value = id;
+            document.silForm.submit();
+        }
+    }
+</script>
+
+}
+

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MvcCoreGiris.Models;
+using MvcCoreGiris.Services;
 
 namespace MvcCoreGiris
 {
@@ -27,6 +28,8 @@ namespace MvcCoreGiris
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddDbContext<OkulDbContex>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSingleton<LukyNumberService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

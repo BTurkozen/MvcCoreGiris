@@ -22,6 +22,11 @@ namespace MvcCoreGiris.Controllers
             return View(_db.Kisiler.ToList());
         }
 
+        public IActionResult Yeni()
+        {
+            return View();
+        }
+
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Yeni(Kisi kisi)
         {
@@ -29,6 +34,7 @@ namespace MvcCoreGiris.Controllers
             {
                 _db.Add(kisi);
                 _db.SaveChanges();
+                TempData["mesaj"] = $"\"{kisi.KisiAd}\"  adlı kişi başarıyla eklenmiştir.";
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -53,6 +59,7 @@ namespace MvcCoreGiris.Controllers
                 //_db.Entry(kisi).State = Microsoft.EntityFrameworkCore.EntityState.Modified; //Altaki yontemin yerinede kullanılabılır.
                 _db.Update(kisi);
                 _db.SaveChanges();
+                TempData["mesaj"] = $"\"{kisi.KisiAd}\" adlı kişi başarıyla düzenlenmiştir.";
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -67,6 +74,7 @@ namespace MvcCoreGiris.Controllers
             {
                 _db.Remove(kisi);
                 _db.SaveChanges();
+                TempData["mesaj"] = $"\"{kisi.KisiAd}\"  adlı kişi başarıyla silinmiştir.";
                 return RedirectToAction(nameof(Index));
             }
             return NotFound();

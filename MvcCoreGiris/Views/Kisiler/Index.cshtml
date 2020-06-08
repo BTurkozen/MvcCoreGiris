@@ -3,12 +3,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Viewbag.Title</h1>
 
-<a asp-action="Yeni" class="btn btn-outline-dark m-3 float-right">
-    <i class="fas fa-plus p-1"></i>
-    Yeni Kişi
-</a>
+
+@if (TempData["mesaj"] != null)
+{
+    //class="alert alert-success"
+<mesaj >
+    @TempData["mesaj"]
+</mesaj>
+
+}
+
+<a asp-action="Yeni" class="btn btn-outline-dark m-3 float-right"><i class="fas fa-plus p-1"></i>Yeni Kişi</a>
 
 <table class="table">
     <thead>
@@ -25,8 +32,8 @@
                 <td>@kisi.Id</td>
                 <td>@kisi.KisiAd</td>
                 <td>
-                    <a asp-action="Duzenle" asp-route-id="@kisi.Id" class="btn btn-outline-dark">Duzenle</a>
-                    <a href="#" class="btn btn-outline-danger" onclick="sil(@kisi.Id, '@kisi.KisiAd')">Sil</a>
+                    <a asp-action="Duzenle" asp-route-id="@kisi.Id" class="btn btn-outline-dark"><i class="fas fa-edit p-2"></i></a>
+                    <a href="#" class="btn btn-outline-danger" onclick="sil(@kisi.Id, '@kisi.KisiAd')"><i class="fas fa-trash p-2"></i></a>
                 </td>
             </tr>
         }
@@ -43,7 +50,7 @@
     function sil(id, kisiad) {
         event.preventDefault();
         if (confirm('"' + kisiad + '"adlı kişiyi silmek istediğinize eminmisiniz?')) {
-            document.silForm.element.id.value = id;
+            document.silForm.elements.id.value = id;
             document.silForm.submit();
         }
     }

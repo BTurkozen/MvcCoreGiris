@@ -6,21 +6,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MvcCoreGiris.Models;
+using MvcCoreGiris.Services;
 
 namespace MvcCoreGiris.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly LukyNumberService _lukyNumberService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, LukyNumberService lukyNumberService)
         {
             _logger = logger;
+            _lukyNumberService = lukyNumberService;
         }
 
         public IActionResult Index()
         {
-            ViewBag.deneme = "Merhaba .Net MVC Core";
+            ViewBag.SansliSayi = _lukyNumberService.LukyNumber;
             return View();
         }
 

@@ -1,6 +1,16 @@
-﻿@inject LukyNumberService lns
+﻿@inject IWeatherService weatherService
 @{
     ViewData["Title"] = "Home Page";
+    string sicaklik;
+    try
+    {
+        sicaklik = weatherService.Temperature("ankara") + "°C";
+    }
+    catch (Exception)
+    {
+
+        sicaklik = " İştenilen değerlere ulaşılamamıştır, Daha sonra tekrar deneyiniz!!";
+    }
 }
 
 <div class="text-center ">
@@ -10,4 +20,9 @@
 
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>@ViewBag.deneme</p>
+    @if (sicaklik != null)
+    {
+
+    <div>Ankara'da Hava Sıcaklığı:@sicaklik</div>
+    }
 </div>

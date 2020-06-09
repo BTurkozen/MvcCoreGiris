@@ -24,6 +24,13 @@
         "webfonts/fa-solid-900.woff2",
         "js/all.min.js"
       ]
+    },
+    {
+      "library": "lodash.js@4.17.15",
+      "destination": "wwwroot/lodash.js/",
+      "files": [
+        "lodash.js"
+      ]
     }
   ]
 }
